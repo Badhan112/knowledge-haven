@@ -12,40 +12,56 @@ import Admin from './components/Admin/Admin';
 import Deals from './components/Deals/Deals';
 import Login from './components/Login/Login';
 import NotMatch from './components/NotMatch/NotMatch';
+import { createContext, useState } from 'react';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import Checkout from './components/Checkout/Checkout';
+import UserProfile from './components/UserProfile/UserProfile';
+
+export const UserContext = createContext()
 
 function App() {
-  return (
-    <Container>
-      <Router>
-        <div>
-          <Header />
+  const [user, setUser] = useState({});
 
-          <Switch>
-            <Route path="/home">
-              <Home />
-            </Route>
-            <Route path="/orders">
-              <Orders />
-            </Route>
-            <Route path="/admin">
-              <Admin />
-            </Route>
-            <Route path="/deals">
-              <Deals />
-            </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="*">
-              <NotMatch />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-    </Container>
+  return (
+    <UserContext.Provider value={[user, setUser]}>
+      <Container>
+        <Router>
+          <div>
+            <Header />
+
+            <Switch>
+              <Route path="/home">
+                <Home />
+              </Route>
+              <PrivateRoute path="/orders">
+                <Orders />
+              </PrivateRoute>
+              <PrivateRoute path="/admin">
+                <Admin />
+              </PrivateRoute>
+              <PrivateRoute path="/checkout">
+                <Checkout />
+              </PrivateRoute>
+              <PrivateRoute path="/userProfile">
+                <UserProfile />
+              </PrivateRoute>
+              <PrivateRoute path="/deals">
+                <Deals />
+              </PrivateRoute>
+              <Route path="/login">
+                <Login />
+              </Route>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route path="*">
+                <NotMatch />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
+      </Container>
+    </UserContext.Provider>
   );
 }
 

@@ -7,10 +7,11 @@ const AddBook = () => {
         name: '',
         author: '',
         price: '',
-        bookImgUrl: '',
     });
+    const bookCoverImage = {
+        imgUrl: '',
+    }
     const [imageData, setImageData] = useState();
-
 
     const handleInputField = event => {
         const bookInfo = { ...newBook };
@@ -28,16 +29,26 @@ const AddBook = () => {
     const handleFormSubmit = event => {
         axios.post('https://api.imgbb.com/1/upload', imageData)
         .then(res => {
-            const info = { ...newBook };
             console.log(res.data.data.display_url);
-            info.bookImgUrl = res.data.data.display_url;
-            setNewBook(info);
+            bookCoverImage.imgUrl = res.data.data.display_url;
+        })
+        .then(() => {
+            const newBookInfo = {...newBook, ...bookCoverImage};
+            fetch('http://localhost:1712/addBook',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newBookInfo),
+            })
+            .then(result => console.log(result));
         })
         .catch(error => {
             console.log(error);
         });
         event.preventDefault();
     }
+    
     return (
         <div>
             <h3>Add Book</h3>
