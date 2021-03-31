@@ -1,17 +1,23 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { UserContext } from '../../App';
 
 const AddBook = () => {
+    const [user] = useContext(UserContext);
     const [newBook, setNewBook] = useState({
         name: '',
         author: '',
         price: '',
+        userName: user.name,
+        userEmail: user.email,
     });
     const bookCoverImage = {
         imgUrl: '',
     }
     const [imageData, setImageData] = useState();
+    const [isSendingData, setIsSendingData] = useState(false);
 
     const handleInputField = event => {
         const bookInfo = { ...newBook };
@@ -27,50 +33,64 @@ const AddBook = () => {
     }
 
     const handleFormSubmit = event => {
+        setIsSendingData(true);
         axios.post('https://api.imgbb.com/1/upload', imageData)
-        .then(res => {
-            console.log(res.data.data.display_url);
-            bookCoverImage.imgUrl = res.data.data.display_url;
-        })
-        .then(() => {
-            const newBookInfo = {...newBook, ...bookCoverImage};
-            fetch('http://localhost:1712/addBook',{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newBookInfo),
+            .then(res => {
+                bookCoverImage.imgUrl = res.data.data.display_url;
             })
-            .then(result => console.log(result));
-        })
-        .catch(error => {
-            console.log(error);
-        });
+            .then(() => {
+                const newBookInfo = { ...newBook, ...bookCoverImage };
+                fetch('http://localhost:1712/addBook', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newBookInfo),
+                })
+                .then(result => {
+                    setIsSendingData(false);
+                    if(result){
+                        alert("Book Information Added Successfully");
+                    }
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            });
         event.preventDefault();
     }
-    
+
     return (
-        <div>
-            <h3>Add Book</h3>
-            <Form onSubmit={handleFormSubmit}>
-                <Form.Group>
-                    <Form.Label>Book Name</Form.Label>
-                    <Form.Control name="name" onBlur={handleInputField} required type="text" placeholder="Enter Name" />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Author Name</Form.Label>
-                    <Form.Control name="author" onBlur={handleInputField} required type="text" placeholder="Enter Name" />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Add Price</Form.Label>
-                    <Form.Control name="price" onBlur={handleInputField} required type="number" placeholder="Enter Price" />
-                </Form.Group>
-                <Form.Group>
-                    <Form.File onChange={handleFileInput} required label="Add Book Cover Photo" />
-                </Form.Group>
-                <Button variant="primary" type="submit">Submit</Button>
-            </Form>
-        </div>
+        <>{
+            isSendingData 
+            ? <div style={{width: "100%", textAlign: "center"}}>
+                <CircularProgress
+                    size={100}
+                    thickness={4}
+                />
+            </div>
+            : <div>
+                <h3>Add Book</h3>
+                <Form onSubmit={handleFormSubmit}>
+                    <Form.Group>
+                        <Form.Label>Book Name</Form.Label>
+                        <Form.Control name="name" onBlur={handleInputField} required type="text" placeholder="Enter Name" />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Author Name</Form.Label>
+                        <Form.Control name="author" onBlur={handleInputField} required type="text" placeholder="Enter Name" />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Add Price</Form.Label>
+                        <Form.Control name="price" onBlur={handleInputField} required type="number" placeholder="Enter Price" />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.File onChange={handleFileInput} required label="Add Book Cover Photo" />
+                    </Form.Group>
+                    <Button variant="primary" type="submit">Submit</Button>
+                </Form>
+            </div>}
+        </>
     );
 };
 

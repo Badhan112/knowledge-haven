@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import QueueIcon from '@material-ui/icons/Queue';
 import EditIcon from '@material-ui/icons/Edit';
 import ManageBooks from '../ManageBooks/ManageBooks';
 import AddBook from '../AddBook/AddBook';
 import EditBook from '../EditBook/EditBook';
+import { Container } from 'react-bootstrap';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -23,9 +23,9 @@ function TabPanel(props) {
             {...other}
         >
             {value === index && (
-                <Box p={3}>
+                <Container style={{width: "100%"}}>
                     {children}
-                </Box>
+                </Container>
             )}
         </div>
     );

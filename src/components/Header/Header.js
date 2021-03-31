@@ -7,7 +7,7 @@ import { UserContext } from '../../App';
 const Header = () => {
     const [user] = useContext(UserContext);
     return (
-        <Navbar expand="lg" sticky="top">
+        <Navbar bg="light" expand="lg" sticky="top">
             <Navbar.Brand as={Link} to="/" className="nav-item">Knowledge Haven</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
