@@ -14,7 +14,7 @@ const Home = () => {
 
     return (
         <Container>
-            { !allBooks ? <div style={{width: "80vw", height: "80vh"}} className="d-flex justify-content-center align-items-center">
+            { !allBooks[0] ? <div style={{width: "80vw", height: "80vh"}} className="d-flex justify-content-center align-items-center">
                 <CircularProgress
                     size={100}
                     thickness={4}
