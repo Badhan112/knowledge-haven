@@ -10,7 +10,7 @@ const Checkout = () => {
     const [isSendingData, setIsSendingData] = useState(false);
 
     useEffect(() => {
-        fetch(`http://localhost:1712/productDetails/${checkoutProduct}`)
+        fetch(`https://rhubarb-cobbler-88648.herokuapp.com/productDetails/${checkoutProduct}`)
             .then(res => res.json())
             .then(data => setBookDetails(data));
     }, [checkoutProduct]);
@@ -29,7 +29,7 @@ const Checkout = () => {
             price
         }
 
-        fetch('http://localhost:1712/orderBook', {
+        fetch('https://rhubarb-cobbler-88648.herokuapp.com/orderBook', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

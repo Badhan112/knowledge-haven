@@ -40,20 +40,20 @@ const AddBook = () => {
             })
             .then(() => {
                 const newBookInfo = { ...newBook, ...bookCoverImage };
-                fetch('http://localhost:1712/addBook', {
+                fetch('https://rhubarb-cobbler-88648.herokuapp.com/addBook', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(newBookInfo),
                 })
-                .then(res => res.json())
-                .then(result =>{
-                    setIsSendingData(false);
-                    if(result){
-                        alert("Book Information Added Successfully");
-                    }
-                });
+                    .then(res => res.json())
+                    .then(result => {
+                        setIsSendingData(false);
+                        if (result) {
+                            alert("Book Information Added Successfully");
+                        }
+                    });
             })
             .catch(error => {
                 console.log(error);
@@ -63,34 +63,34 @@ const AddBook = () => {
 
     return (
         <>{
-            isSendingData 
-            ? <div style={{width: "100%", textAlign: "center"}}>
-                <CircularProgress
-                    size={100}
-                    thickness={4}
-                />
-            </div>
-            : <div>
-                <h3>Add Book</h3>
-                <Form onSubmit={handleFormSubmit}>
-                    <Form.Group>
-                        <Form.Label>Book Name</Form.Label>
-                        <Form.Control name="name" onBlur={handleInputField} required type="text" placeholder="Enter Name" />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Author Name</Form.Label>
-                        <Form.Control name="author" onBlur={handleInputField} required type="text" placeholder="Enter Name" />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Add Price</Form.Label>
-                        <Form.Control name="price" onBlur={handleInputField} required type="number" placeholder="Enter Price" />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.File onChange={handleFileInput} required label="Add Book Cover Photo" />
-                    </Form.Group>
-                    <Button variant="primary" type="submit">Submit</Button>
-                </Form>
-            </div>}
+            isSendingData
+                ? <div style={{ width: "100%", height: "80vh" }} className="d-flex justify-content-center align-items-center">
+                    <CircularProgress
+                        size={100}
+                        thickness={4}
+                    />
+                </div>
+                : <div>
+                    <h3>Add Book</h3>
+                    <Form onSubmit={handleFormSubmit}>
+                        <Form.Group>
+                            <Form.Label>Book Name</Form.Label>
+                            <Form.Control name="name" onBlur={handleInputField} required type="text" placeholder="Enter Name" />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Author Name</Form.Label>
+                            <Form.Control name="author" onBlur={handleInputField} required type="text" placeholder="Enter Name" />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Add Price</Form.Label>
+                            <Form.Control name="price" onBlur={handleInputField} required type="number" placeholder="Enter Price" />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.File onChange={handleFileInput} required label="Add Book Cover Photo" />
+                        </Form.Group>
+                        <Button variant="primary" type="submit">Submit</Button>
+                    </Form>
+                </div>}
         </>
     );
 };
