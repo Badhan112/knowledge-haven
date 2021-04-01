@@ -16,8 +16,10 @@ const Orders = () => {
     return (
         <div>
             <h3>{name}</h3>
-            {
-                allOrders.map(order => <OrderDetailsTable order={order} key={order._id} />)
+            {   
+                allOrders[0]
+                ? allOrders.map(order => <OrderDetailsTable order={order} key={order._id} />)
+                : <h5>Nothing Ordered Yet</h5>
             }
         </div>
     );

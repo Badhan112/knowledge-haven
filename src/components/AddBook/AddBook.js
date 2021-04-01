@@ -47,7 +47,8 @@ const AddBook = () => {
                     },
                     body: JSON.stringify(newBookInfo),
                 })
-                .then(result => {
+                .then(res => res.json())
+                .then(result =>{
                     setIsSendingData(false);
                     if(result){
                         alert("Book Information Added Successfully");

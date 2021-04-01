@@ -21,6 +21,7 @@ function TabPanel(props) {
             id={`vertical-tabpanel-${index}`}
             aria-labelledby={`vertical-tab-${index}`}
             {...other}
+            style={{width: "100%"}}
         >
             {value === index && (
                 <Container style={{width: "100%"}}>
