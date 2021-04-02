@@ -8,6 +8,7 @@ const Orders = () => {
     const { name, email } = user;
     const [allOrders, setAllOrders] = useState([]);
     const [isFetchData, setIsFetchData] = useState(false);
+    document.title = 'Orders - Knowledge Haven';
 
     useEffect(() => {
         setIsFetchData(true);

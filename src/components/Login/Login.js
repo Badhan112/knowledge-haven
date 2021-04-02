@@ -29,6 +29,7 @@ const Login = () => {
     let history = useHistory();
     let location = useLocation();
     let { from } = location.state || { from: { pathname: "/" } };
+    document.title = 'Login - Knowledge Haven';
 
     const isValid = e => {
         if (e.target.name === 'email') {
@@ -57,7 +58,7 @@ const Login = () => {
                         setUser(userData);
                         history.replace(from);
                     }).catch(error => {
-                        alert(error);
+                        alert('Failed to Create an User Account\n', error);
                     });
                 });
         }
@@ -71,7 +72,7 @@ const Login = () => {
                     history.replace(from);
                 })
                 .catch(error => {
-                    alert(error);
+                    alert('Failed to Sign in with This Account!\nPlease Try Again Letter!\n', error);
                 });
         }
 
@@ -91,7 +92,7 @@ const Login = () => {
         facebookSignIn().then(res => {
             updateUserData(res);
         }).catch(err => {
-            alert(err);
+            alert('Failed to Sign in with This Account!\nPlease Try Again Letter!\n', err);
         });
     }
 
@@ -99,7 +100,7 @@ const Login = () => {
         googleSignIn().then(res => {
             updateUserData(res);
         }).catch(err => {
-            alert(err);
+            alert('Failed to Sign in with This Account!\nPlease Try Again Letter!\n', err);
         });
     }
 

@@ -10,6 +10,7 @@ const UserProfile = () => {
             setUser({});
         })
     }
+    document.title = `${user.name.split(' ')[0]} - Knowledge Haven`;
 
     return (
         <div style={{ textAlign: 'center' }}>

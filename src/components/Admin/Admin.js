@@ -60,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
 const Admin = () => {
     const classes = useStyles();
     const [value, setValue] = useState(0);
+    document.title = 'Admin - Knowledge Haven';
 
     const handleChange = (event, newValue) => {
         setValue(newValue);

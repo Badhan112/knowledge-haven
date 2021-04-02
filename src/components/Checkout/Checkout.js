@@ -8,6 +8,7 @@ const Checkout = () => {
     const [checkoutProduct, setCheckoutProduct] = useContext(CheckoutContext);
     const [bookDetails, setBookDetails] = useState({});
     const [isSendingData, setIsSendingData] = useState(false);
+    document.title = 'Checkout - Knowledge Haven';
 
     useEffect(() => {
         fetch(`https://rhubarb-cobbler-88648.herokuapp.com/productDetails/${checkoutProduct}`)

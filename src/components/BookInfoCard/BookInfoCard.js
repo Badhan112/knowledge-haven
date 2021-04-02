@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Button, Col, Card } from 'react-bootstrap';
+import { Button, Col, Card, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { CheckoutContext } from '../../App';
 
@@ -9,8 +9,8 @@ const BookInfoCard = ({ book }) => {
     return (
         <Col sm={12} md={6} lg={4} className="p-3">
             <Card className="p-3 shadow ">
-                <div className="p-5 bg-light" style={{borderRadius: "10px"}}>
-                    <Card.Img variant="top" src={imgUrl} style={{height: "250px"}} />
+                <div className="p-4 bg-light" style={{borderRadius: "10px"}}>
+                    <Card.Img as={Image} variant="top" src={imgUrl} fluid />
                 </div>
                 <Card.Body>
                     <Card.Title>{name}</Card.Title>

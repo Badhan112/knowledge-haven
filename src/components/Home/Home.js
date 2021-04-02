@@ -5,6 +5,7 @@ import BookInfoCard from '../BookInfoCard/BookInfoCard';
 
 const Home = () => {
     const [allBooks, setAllBooks] = useState([]);
+    document.title = 'Home - Knowledge Haven';
 
     useEffect(() => {
         fetch('https://rhubarb-cobbler-88648.herokuapp.com/allBooks')
