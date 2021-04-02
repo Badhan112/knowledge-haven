@@ -23,6 +23,7 @@ const BookDetails = ({book, handleDelete}) => {
                 <IconButton color="primary" style={{color: '#3BC83B'}} onClick={handleEdit}>
                     <EditIcon />
                 </IconButton>
+                
                 <IconButton color="secondary" onClick={() => handleDelete(_id)}>
                     <DeleteIcon />
                 </IconButton>

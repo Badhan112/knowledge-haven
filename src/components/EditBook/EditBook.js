@@ -34,13 +34,13 @@ const EditBook = () => {
         .then(result => {
             setIsSendingData(false);
             if(result){
-                alert('Book Info Updated Successfully');
+                alert('Book Info Updated Successfully.');
             } else{
-                alert('Failed to Updated Book Info');
+                alert('Failed to Updated Book Info!');
             }
         }).catch(() =>{
             setIsSendingData(false);
-            alert('Failed to Updated Book Info');
+            alert('Failed to Updated Book Info!');
         })
         event.preventDefault();
     }

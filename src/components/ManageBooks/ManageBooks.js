@@ -33,7 +33,7 @@ const ManageBooks = () => {
             setIsFetchData(false);
             if (result) {
                 fetchAddedBooksData(email);
-                alert('Book Deleted Successfully');
+                alert('Book Deleted Successfully!');
             }
         })
     }
