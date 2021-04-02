@@ -6,6 +6,11 @@ import { EditBookContext } from '../Admin/Admin';
 const EditBook = () => {
     const [isSendingData, setIsSendingData] = useState(false);
     const [bookForEdit] = useContext(EditBookContext);
+    const [newBookInfo, setNewBookInfo] = useState({
+        name: '',
+        author: '',
+        price: '',
+    });
 
     useEffect(() => {
         document.getElementById("bookName").value = bookForEdit.name || '';
@@ -13,12 +18,31 @@ const EditBook = () => {
         document.getElementById("price").value = bookForEdit.price || '';
     }, [bookForEdit])
 
-    const handleInputField = () => {
-
+    const handleInputField = event => {
+        const bookInfo = { ...newBookInfo };
+        bookInfo[event.target.name] = event.target.value;
+        setNewBookInfo(bookInfo);
     }
 
-    const handleFormSubmit = () => {
-
+    const handleFormSubmit = event => {
+        setIsSendingData(true);
+        fetch(`http://localhost:1712/updateBook/${bookForEdit._id}`,{
+            method: 'PATCH',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(newBookInfo),
+        }).then(res => res.json())
+        .then(result => {
+            setIsSendingData(false);
+            if(result){
+                alert('Book Info Updated Successfully');
+            } else{
+                alert('Failed to Updated Book Info');
+            }
+        }).catch(() =>{
+            setIsSendingData(false);
+            alert('Failed to Updated Book Info');
+        })
+        event.preventDefault();
     }
 
     return (
@@ -31,6 +55,10 @@ const EditBook = () => {
                     />
                 </div>
                 : <div>
+                    {
+                        !bookForEdit.name && 
+                        <h2 className="text-danger">Please, Select a Book for Edit at <i>Manage Books</i> Tab</h2>
+                    }
                     <h3>Edit Book</h3>
                     <Form onSubmit={handleFormSubmit}>
                         <Form.Group>
@@ -47,7 +75,8 @@ const EditBook = () => {
                         </Form.Group>
                         <Button variant="primary" type="submit">Submit</Button>
                     </Form>
-                </div>}
+                </div>
+            }
         </>
     );
 };
