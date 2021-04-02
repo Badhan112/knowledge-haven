@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
@@ -57,9 +57,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+export const TabContext = createContext();
+export const EditBookContext = createContext();
+
 const Admin = () => {
     const classes = useStyles();
     const [value, setValue] = useState(0);
+    const [bookForEdit, setBookForEdit] = useState({});
     document.title = 'Admin - Knowledge Haven';
 
     const handleChange = (event, newValue) => {
@@ -67,33 +71,37 @@ const Admin = () => {
     };
 
     return (
-        <Row className={classes.root}>
-            <Col lg={3} md={5} sm={12}>
-                <Tabs
-                    orientation="vertical"
-                    variant="scrollable"
-                    value={value}
-                    onChange={handleChange}
-                    aria-label="Vertical tabs example"
-                    className={classes.tabs}
-                >
-                    <Tab label={<div><DashboardIcon style={{ marginRight: "10px" }} />Manage Books</div>} {...a11yProps(0)} />
-                    <Tab label={<div><QueueIcon style={{ marginRight: "10px" }} />Add Book</div>} {...a11yProps(1)} />
-                    <Tab label={<div><EditIcon style={{ marginRight: "10px" }} />Edit Book</div>} {...a11yProps(2)} />
-                </Tabs>
-            </Col>
-            <Col lg={9} md={7} sm={12}>
-                <TabPanel value={value} index={0}>
-                    <ManageBooks />
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                    <AddBook />
-                </TabPanel>
-                <TabPanel value={value} index={2}>
-                    <EditBook />
-                </TabPanel>
-            </Col>
-        </Row>
+        <TabContext.Provider value={setValue}>
+            <EditBookContext.Provider value={[bookForEdit, setBookForEdit]}>
+                <Row className={classes.root}>
+                    <Col lg={3} md={5} sm={12}>
+                        <Tabs
+                            orientation="vertical"
+                            variant="scrollable"
+                            value={value}
+                            onChange={handleChange}
+                            aria-label="Vertical tabs example"
+                            className={classes.tabs}
+                        >
+                            <Tab label={<div><DashboardIcon style={{ marginRight: "10px" }} />Manage Books</div>} {...a11yProps(0)} />
+                            <Tab label={<div><QueueIcon style={{ marginRight: "10px" }} />Add Book</div>} {...a11yProps(1)} />
+                            <Tab label={<div><EditIcon style={{ marginRight: "10px" }} />Edit Book</div>} {...a11yProps(2)} />
+                        </Tabs>
+                    </Col>
+                    <Col lg={9} md={7} sm={12}>
+                        <TabPanel value={value} index={0}>
+                            <ManageBooks />
+                        </TabPanel>
+                        <TabPanel value={value} index={1}>
+                            <AddBook />
+                        </TabPanel>
+                        <TabPanel value={value} index={2}>
+                            <EditBook />
+                        </TabPanel>
+                    </Col>
+                </Row>
+            </EditBookContext.Provider>
+        </TabContext.Provider>
     );
 };
 

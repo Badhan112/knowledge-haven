@@ -28,14 +28,14 @@ const ManageBooks = () => {
         fetch(`https://rhubarb-cobbler-88648.herokuapp.com/deleteBook/${id}`, {
             method: "DELETE"
         })
-            .then(res => res.json())
-            .then(result => {
-                setIsFetchData(false);
-                if (result) {
-                    fetchAddedBooksData(email);
-                    alert('Book Deleted Successfully');
-                }
-            })
+        .then(res => res.json())
+        .then(result => {
+            setIsFetchData(false);
+            if (result) {
+                fetchAddedBooksData(email);
+                alert('Book Deleted Successfully');
+            }
+        })
     }
 
     return (
