@@ -26,7 +26,7 @@ const EditBook = () => {
 
     const handleFormSubmit = event => {
         setIsSendingData(true);
-        fetch(`http://localhost:1712/updateBook/${bookForEdit._id}`,{
+        fetch(`https://rhubarb-cobbler-88648.herokuapp.com/updateBook/${bookForEdit._id}`,{
             method: 'PATCH',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(newBookInfo),
