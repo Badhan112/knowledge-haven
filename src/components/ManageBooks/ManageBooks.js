@@ -12,11 +12,11 @@ const ManageBooks = () => {
     const fetchAddedBooksData = userEmail => {
         setIsFetchData(true);
         fetch(`https://rhubarb-cobbler-88648.herokuapp.com/addedBooks/${userEmail}`)
-            .then(res => res.json())
-            .then(data => {
-                setIsFetchData(false);
-                setAddedBooks(data);
-            });
+        .then(res => res.json())
+        .then(data => {
+            setIsFetchData(false);
+            setAddedBooks(data);
+        });
     }
 
     useEffect(() => {
