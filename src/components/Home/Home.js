@@ -8,7 +8,7 @@ const Home = () => {
     document.title = 'Home - Knowledge Haven';
 
     useEffect(() => {
-        fetch('https://knowledge-haven-bd.vercel.app/allBooks')
+        fetch('https://knowledge-haven-server.onrender.com/allBooks')
         .then(res => res.json())
         .then(data => setAllBooks(data));
     }, []);

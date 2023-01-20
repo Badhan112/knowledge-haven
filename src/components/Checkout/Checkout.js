@@ -11,7 +11,7 @@ const Checkout = () => {
     document.title = 'Checkout - Knowledge Haven';
 
     useEffect(() => {
-        fetch(`https://knowledge-haven-bd.vercel.app/productDetails/${checkoutProduct}`)
+        fetch(`https://knowledge-haven-server.onrender.com/productDetails/${checkoutProduct}`)
             .then(res => res.json())
             .then(data => setBookDetails(data));
     }, [checkoutProduct]);
@@ -30,7 +30,7 @@ const Checkout = () => {
             price
         }
 
-        fetch('https://knowledge-haven-bd.vercel.app/orderBook', {
+        fetch('https://knowledge-haven-server.onrender.com/orderBook', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

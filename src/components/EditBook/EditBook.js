@@ -26,7 +26,7 @@ const EditBook = () => {
 
     const handleFormSubmit = event => {
         setIsSendingData(true);
-        fetch(`https://knowledge-haven-bd.vercel.app/updateBook/${bookForEdit._id}`,{
+        fetch(`https://knowledge-haven-server.onrender.com/updateBook/${bookForEdit._id}`,{
             method: 'PATCH',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(newBookInfo),

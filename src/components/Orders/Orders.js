@@ -12,7 +12,7 @@ const Orders = () => {
 
     useEffect(() => {
         setIsFetchData(true);
-        fetch(`https://knowledge-haven-bd.vercel.app/submitedOrders/${email}`)
+        fetch(`https://knowledge-haven-server.onrender.com/submitedOrders/${email}`)
         .then(res => res.json())
         .then(data => {
             setAllOrders(data);

@@ -40,7 +40,7 @@ const AddBook = () => {
             })
             .then(() => {
                 const newBookInfo = { ...newBook, ...bookCoverImage };
-                fetch('https://knowledge-haven-bd.vercel.app/addBook', {
+                fetch('https://knowledge-haven-server.onrender.com/addBook', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

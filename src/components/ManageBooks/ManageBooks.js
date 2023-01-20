@@ -11,7 +11,7 @@ const ManageBooks = () => {
 
     const fetchAddedBooksData = userEmail => {
         setIsFetchData(true);
-        fetch(`https://knowledge-haven-bd.vercel.app/addedBooks/${userEmail}`)
+        fetch(`https://knowledge-haven-server.onrender.com/addedBooks/${userEmail}`)
         .then(res => res.json())
         .then(data => {
             setIsFetchData(false);
@@ -25,7 +25,7 @@ const ManageBooks = () => {
 
     const handleDelete = id => {
         setIsFetchData(true);
-        fetch(`https://knowledge-haven-bd.vercel.app/deleteBook/${id}`, {
+        fetch(`https://knowledge-haven-server.onrender.com/deleteBook/${id}`, {
             method: "DELETE"
         })
         .then(res => res.json())
