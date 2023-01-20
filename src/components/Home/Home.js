@@ -8,7 +8,7 @@ const Home = () => {
     document.title = 'Home - Knowledge Haven';
 
     useEffect(() => {
-        fetch('https://rhubarb-cobbler-88648.herokuapp.com/allBooks')
+        fetch('https://knowledge-haven-bd.vercel.app/allBooks')
         .then(res => res.json())
         .then(data => setAllBooks(data));
     }, []);

@@ -11,7 +11,7 @@ const ManageBooks = () => {
 
     const fetchAddedBooksData = userEmail => {
         setIsFetchData(true);
-        fetch(`https://rhubarb-cobbler-88648.herokuapp.com/addedBooks/${userEmail}`)
+        fetch(`https://knowledge-haven-bd.vercel.app/addedBooks/${userEmail}`)
         .then(res => res.json())
         .then(data => {
             setIsFetchData(false);
@@ -25,7 +25,7 @@ const ManageBooks = () => {
 
     const handleDelete = id => {
         setIsFetchData(true);
-        fetch(`https://rhubarb-cobbler-88648.herokuapp.com/deleteBook/${id}`, {
+        fetch(`https://knowledge-haven-bd.vercel.app/deleteBook/${id}`, {
             method: "DELETE"
         })
         .then(res => res.json())

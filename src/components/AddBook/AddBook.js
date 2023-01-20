@@ -40,7 +40,7 @@ const AddBook = () => {
             })
             .then(() => {
                 const newBookInfo = { ...newBook, ...bookCoverImage };
-                fetch('https://rhubarb-cobbler-88648.herokuapp.com/addBook', {
+                fetch('https://knowledge-haven-bd.vercel.app/addBook', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

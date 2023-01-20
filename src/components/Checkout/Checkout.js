@@ -11,7 +11,7 @@ const Checkout = () => {
     document.title = 'Checkout - Knowledge Haven';
 
     useEffect(() => {
-        fetch(`https://rhubarb-cobbler-88648.herokuapp.com/productDetails/${checkoutProduct}`)
+        fetch(`https://knowledge-haven-bd.vercel.app/productDetails/${checkoutProduct}`)
             .then(res => res.json())
             .then(data => setBookDetails(data));
     }, [checkoutProduct]);
@@ -30,7 +30,7 @@ const Checkout = () => {
             price
         }
 
-        fetch('https://rhubarb-cobbler-88648.herokuapp.com/orderBook', {
+        fetch('https://knowledge-haven-bd.vercel.app/orderBook', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

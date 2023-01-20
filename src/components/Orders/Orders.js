@@ -12,7 +12,7 @@ const Orders = () => {
 
     useEffect(() => {
         setIsFetchData(true);
-        fetch(`https://rhubarb-cobbler-88648.herokuapp.com/submitedOrders/${email}`)
+        fetch(`https://knowledge-haven-bd.vercel.app/submitedOrders/${email}`)
         .then(res => res.json())
         .then(data => {
             setAllOrders(data);
